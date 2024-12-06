@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from women.views import WomenApiiew
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/womenlist', WomenApiiew.as_view()), #откуда здесь .as_view?
+    # as_view Он позволяет Django использовать классы в маршрутах, как если бы это были функции.
 ]
