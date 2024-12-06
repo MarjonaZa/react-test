@@ -14,7 +14,8 @@ class Women(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True) #выяснить что такое db_inedx
-
+# это удобный способ указать Django автоматически оптимизировать запросы
+    # к определённым полям через индексацию.
     def __str__(self):
         return self.name
 
