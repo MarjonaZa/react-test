@@ -7,6 +7,7 @@ from .models import Women
 
 
 class WomenSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Women
         fields = ("id","title", "content", "image", "cat") #какие поля из бд будут возврашать обатно клиенту
@@ -43,7 +44,6 @@ class WomenSerializer(serializers.ModelSerializer):
 #         instance.cat_id = validated_data.get('cat_id', instance.cat_id)
 #         instance.save()
 #         return instance
-
 
 
    # когда при пост запросе делаем serializer.is_valid(raise_exception=True) #формирруеться словарь validated_data
