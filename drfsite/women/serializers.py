@@ -1,20 +1,55 @@
 import io
 
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
+# from rest_framework.renderers import JSONRenderer
+# from rest_framework.parsers import JSONParser
 from .models import Women
+
+
+class WomenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Women
+        fields = ("id","title", "content", "image", "cat") #какие поля из бд будут возврашать обатно клиенту
+
+
 
 # class WomenModel:
 #     def __init__(self, title, content): #это  инициализатор создаём объекты этого класса
 #         self.title=title
 #         self.content=content
 
-class WomenSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(max_length=255) # отвечает за представление дданных в виде обычной строки
-    content = serializers.CharField()
 
+
+
+
+# class WomenSerializer(serializers.Serializer):
+#     title = serializers.CharField(max_length=255) # отвечает за представление дданных в виде обычной строки
+#     content = serializers.CharField()
+#     image = serializers.ImageField()
+#     time_created = serializers.DateTimeField(read_only=True)
+#     time_updated = serializers.DateTimeField(read_only=True)
+#     is_published = serializers.BooleanField(default=True)
+#     cat_id = serializers.IntegerField()
 #
+#     def create(self, validated_data):
+#         return Women.objects.create(**validated_data)
+#
+#     def update(self, instance, validated_data):
+#         instance.title = validated_data.get('title', instance.title) #'title', если не можем вернуть ключь тайтл то возвращаем из модели вумен instance.titl
+#         instance.content = validated_data.get('content', instance.content)
+#         instance.image = validated_data.get('image', instance.image)
+#         instance.time_updated = validated_data.get('time_updated', instance.time_updated)
+#         instance.is_published = validated_data.get('is_published', instance.is_published)
+#         instance.cat_id = validated_data.get('cat_id', instance.cat_id)
+#         instance.save()
+#         return instance
+
+
+
+   # когда при пост запросе делаем serializer.is_valid(raise_exception=True) #формирруеться словарь validated_data
+       # return а тут возвращем полученный объект
+    #Women.objects.create(**validated_data) тут добавляем новй объект  1
+
 # def encode(): #мы будем выпольгнять кодирование преобразование объектов WomenModel в джосон формат
 #     model= WomenModel('Anjela', 'content: Angella') #объект сериализации
 #     model_sr= WomenSerializer(model)
