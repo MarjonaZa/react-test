@@ -7,6 +7,7 @@ from rest_framework.generics import ListCreateAPIView, UpdateAPIView, RetrieveUp
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Women, Category
+from .permissinon import *
 from .serializers import WomenSerializer
 from rest_framework.permissions import *
 # сласс APIView предсавтляет собой некий базовый функционал для работа различных классов
@@ -15,18 +16,20 @@ from rest_framework.permissions import *
 
 
 class WomenListAPIView(generics.ListCreateAPIView): #тепеь это представление делает всё тоже самое что и WomenApiiew но в 3 бляин сроки фух(*?*:?*8 крч это представление с помощью базового метода ListAPIView
-    queryset = Women.objects.all() #ссылаеться на список записей возврщ клиенту
+    queryset = Women.objects.all().select_related('user', 'cat') #ссылаеться на список записей возврщ клиенту
     serializer_class = WomenSerializer #сериализатор который мы бедм применять
     permission_classes = (IsAuthenticatedOrReadOnly, )
 
 class WomenAPIUpdate(generics.RetrieveUpdateAPIView ):
-    queryset = Women.objects.all()
+    queryset = Women.objects.all().select_related('user', 'cat')
     #как-будто бы все данные но нет, с помощью UpdateAPIView метод queryset будет барть только 1 элемент
     serializer_class = WomenSerializer
+    permission_classes = (IsAdminOrReadOnly, )
 
 class WomenAPIDestroy(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Women.objects.all()
+    queryset = Women.objects.all().select_related('user', 'cat')
     serializer_class = WomenSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,  )
 
 
 

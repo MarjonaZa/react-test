@@ -8,6 +8,7 @@ from .models import Women
 
 class WomenSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    #создается скрыттое поле хиден и в этом скрытом поле по умолчанию прописывается текущиё пользователь  CurrentUserDefault
     class Meta:
         model = Women
         fields = ("id","title", "content", "image", "cat") #какие поля из бд будут возврашать обатно клиенту
