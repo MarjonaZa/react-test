@@ -1,23 +1,22 @@
+from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.auth import get_user_model
-User=get_user_model()
-# Create your models here.
+
+
 class Women(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
-    time_created = models.DateTimeField(auto_now_add=True)
-    time_updated = models.DateTimeField(auto_now=True)
+    time_create = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    time_update = models.DateTimeField(auto_now=True, blank=True, null=True)
     is_published = models.BooleanField(default=True)
-    cat=models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
-    user=models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
 
+
 class Category(models.Model):
-    name = models.CharField(max_length=255, db_index=True) #выяснить что такое db_inedx
-# это удобный способ указать Django автоматически оптимизировать запросы к определённым полям через индексацию.
+    name = models.CharField(max_length=100, db_index=True)
+
     def __str__(self):
         return self.name
-

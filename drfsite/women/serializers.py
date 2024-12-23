@@ -11,7 +11,7 @@ class WomenSerializer(serializers.ModelSerializer):
     #создается скрыттое поле хиден и в этом скрытом поле по умолчанию прописывается текущиё пользователь  CurrentUserDefault
     class Meta:
         model = Women
-        fields = ("id","title", "content", "image", "cat") #какие поля из бд будут возврашать обатно клиенту
+        fields = "__all__" #какие поля из бд будут возврашать обатно клиенту
 
 
 

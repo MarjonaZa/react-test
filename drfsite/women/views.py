@@ -15,10 +15,19 @@ from rest_framework.permissions import *
 # Create your views here.
 
 
+
+
+# class WomenListAPIView(generics.ListCreateAPIView): #тепеь это представление делает всё тоже самое что и WomenApiiew но в 3 бляин сроки фух(*?*:?*8 крч это представление с помощью базового метода ListAPIView
+#     queryset = Women.objects.all().select_related('user', 'cat') #ссылаеться на список записей возврщ клиенту
+#     serializer_class = WomenSerializer #сериализатор который мы бедм применять
+#     permission_classes = (IsAuthenticatedOrReadOnly, )
+
 class WomenListAPIView(generics.ListCreateAPIView): #тепеь это представление делает всё тоже самое что и WomenApiiew но в 3 бляин сроки фух(*?*:?*8 крч это представление с помощью базового метода ListAPIView
-    queryset = Women.objects.all().select_related('user', 'cat') #ссылаеться на список записей возврщ клиенту
+    queryset = Women.objects.all() #ссылаеться на список записей возврщ клиенту
     serializer_class = WomenSerializer #сериализатор который мы бедм применять
     permission_classes = (IsAuthenticatedOrReadOnly, )
+
+
 
 class WomenAPIUpdate(generics.RetrieveUpdateAPIView ):
     queryset = Women.objects.all().select_related('user', 'cat')
