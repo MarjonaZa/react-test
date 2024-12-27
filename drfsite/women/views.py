@@ -2,6 +2,7 @@ from django.contrib.admin import action
 from django.forms import model_to_dict
 from django.shortcuts import render
 from rest_framework import generics, viewsets, mixins, permissions
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.generics import ListCreateAPIView, UpdateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.views import APIView
@@ -35,6 +36,7 @@ class WomenAPIUpdate(generics.RetrieveUpdateAPIView ):
     queryset = Women.objects.all()
     serializer_class = WomenSerializer
     permission_classes = (IsAuthenticated, )
+    # authentication_classes = (TokenAuthentication, ) # даёт доступ только по токенам
 
 class WomenAPIDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Women.objects.all()
