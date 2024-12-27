@@ -30,15 +30,16 @@ class WomenListAPIView(generics.ListCreateAPIView): #тепеь это пред�
 
 
 class WomenAPIUpdate(generics.RetrieveUpdateAPIView ):
-    queryset = Women.objects.all().select_related('user', 'cat')
+    # queryset = Women.objects.all().select_related('user', 'cat')
     #как-будто бы все данные но нет, с помощью UpdateAPIView метод queryset будет барть только 1 элемент
+    queryset = Women.objects.all()
     serializer_class = WomenSerializer
-    permission_classes = (IsAdminOrReadOnly, )
+    permission_classes = (IsAuthenticated, )
 
 class WomenAPIDestroy(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Women.objects.all().select_related('user', 'cat')
+    queryset = Women.objects.all()
     serializer_class = WomenSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,  )
+    permission_classes = (IsAdminOrReadOnly,  )
 
 
 
